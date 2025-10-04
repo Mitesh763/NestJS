@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm rounded-bottom-5 px-4 pb-0" style="background-color: #505f86;">
+  <div class="container-fluid">
+    <a href="/products" class="navbar-brand nav-link text-white  fw-bold text-uppercase">Shops Zone</a>
+
+    <div class="d-flex align-items-center gap-3">
+
+      <% if (user) { %>
+      <a href="/carts" class="nav-link text-white fw-medium position-relative"><i class="bi bi-cart-plus me-1 fs-4 "></i>
+        <a href="/products/list" class="nav-link text-white fw-medium position-relative"> List</a>
+      </a>
+
+      <% } %>
+      <% if (user && user.role==='admin' ) { %>
+      <a href="/users/admin" class="nav-link text-white fw-medium position-relative"> Profile</a>
+      <% } else if (user) { %>
+      <a href="/auth/user" class="nav-link text-white fw-medium position-relative"> Profile</a>
+      <% } else { %>
+      <a href="/auth/login" class="nav-link text-white fw-medium position-relative">Login</a>
+      <% } %>
+
+      <% if (user) { %>
+      <form action="/auth/logout" method="POST" class="d-inline m-0 p-0">
+        <button class="btn btn-link nav-link text-white fw-medium p-0 m-0 position-relative" type="submit">
+          Logout
+        </button>
+      </form>
+      <% } %>
+    </div>
+  </div>
+</nav>

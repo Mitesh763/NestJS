@@ -1,0 +1,69 @@
+<% layout('partials/layout') -%>
+
+<div
+  class="container d-flex align-items-center justify-content-center min-vh-100"
+>
+  <div class="card shadow-lg w-100" style="max-width: 600px">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">Update My Profile</h2>
+
+      <div id="message" class="text-danger text-center mb-3"></div>
+
+      <form method="post" action="update-profile?_method=PUT">
+        <div class="mb-3">
+          <label for="username" class="form-label"
+            >Username<span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            id="username"
+            name="name"
+            value="<%= data.name %>"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label"
+            >Email<span class="text-danger">*</span></label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value="<%= data.email %>"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="phone_number" class="form-label"
+            >Phone Number<span class="text-danger">*</span></label
+          >
+          <input
+            type="tel"
+            id="phone_number"
+            name="phone_number"
+            value="<%= data.phone_number %>"
+            class="form-control"
+            required
+          />
+
+          <% const phone_numberError=error && error.find(e=> e.field === 'phone_number');
+                  %>
+                  <% if (phone_numberError) { %>
+                    <div class="text-danger">
+                      <%= phone_numberError.errors[0] %>
+                    </div>
+                    <% } %>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

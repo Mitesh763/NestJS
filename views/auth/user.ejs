@@ -1,0 +1,109 @@
+<% layout('partials/layout') -%>
+
+<div class="container my-5 text-center">
+  <h1 class="fw-semibold text-dark mb-4">Dashboard</h1>
+
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-3">
+      <div class="card shadow-sm h-100 border-0 rounded-3">
+        <a
+          href="/auth/profile"
+          class="card-body text-decoration-none text-dark"
+        >
+          <h5 class="fw-bold text-primary">My Profile</h5>
+          <p class="text-muted small">
+            View your personal information and details.
+          </p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm h-100 border-0 rounded-3">
+        <a
+          href="/auth/update-profile"
+          class="card-body text-decoration-none text-dark"
+        >
+          <h5 class="fw-bold text-primary">Update Profile</h5>
+          <p class="text-muted small">Modify your account information.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm h-100 border-0 rounded-3">
+        <a
+          href="/auth/profile-picture"
+          class="card-body text-decoration-none text-dark"
+        >
+          <h5 class="fw-bold text-primary">My Profile Picture</h5>
+          <p class="text-muted small">Update My Profile Picture</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm h-100 border-0 rounded-3">
+        <a href="/address" class="card-body text-decoration-none text-dark">
+          <h5 class="fw-bold text-primary">My Address</h5>
+          <p class="text-muted small">Manage My Address</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm h-100 border-0 rounded-3">
+        <a href="/orders" class="card-body text-decoration-none text-dark">
+          <h5 class="fw-bold text-primary">My Orders</h5>
+          <p class="text-muted small">Manage My Order</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-sm h-100 border-0 rounded-3">
+        <form action="/auth/logout" method="POST" class="card-body p-0 m-0">
+          <button
+            type="submit"
+            class="btn w-100 h-100 text-decoration-none text-dark"
+          >
+            <h5 class="fw-bold text-primary">Log Out</h5>
+            <p class="text-muted small">End your current session.</p>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    
+      <div class="col-md-3">
+        <div class="card shadow-sm h-100 border-0 rounded-3">
+          <form action="/auth?_method=DELETE" method="POST" class="card-body p-0 m-0">
+            <button type="button" class="btn w-100 h-100 text-decoration-none text-dark" data-bs-toggle="modal"
+              data-bs-target="#confirmDeleteModal<%= user.id %>">
+              <h5 class="fw-bold text-danger">Delete account</h5>
+              <p class="text-muted small">Remove my account permanently.</p>
+            </button>
+        </div>
+      </div>
+
+      <div class="modal fade" id="confirmDeleteModal<%= user.id %>" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+              <h5 class="modal-title">Confirm Delete</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete your account?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <form action="/auth?_method=DELETE" method="POST" >
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

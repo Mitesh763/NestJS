@@ -1,0 +1,64 @@
+<% layout('partials/layout') -%>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h4 class="mb-4">Change Profile Picture</h4>
+
+          <div class="mb-3">
+            <img
+              id="profilePreview"
+              src="/images/<%= user.profile %>"
+              alt="Profile Picture"
+              class="rounded-circle shadow-sm"
+              style="width: 150px; height: 150px; object-fit: cover"
+            />
+          </div>
+
+          <form
+            action="profile-picture"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <div class="mb-3">
+              <label for="profilePic" class="form-label"
+                >Select New Picture<span class="text-danger">*</span></label
+              >
+              <input
+                class="form-control"
+                type="file"
+                id="profilePic"
+                name="profile"
+                accept="image/*"
+                required
+              />
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <a href="/auth/user" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Cancel
+              </a>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-upload"></i> Upload
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById('profilePic')
+    .addEventListener('change', function (event) {
+      const [file] = event.target.files;
+      if (file) {
+        document.getElementById('profilePreview').src =
+          URL.createObjectURL(file);
+      }
+    });
+</script>

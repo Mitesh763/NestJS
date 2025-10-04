@@ -1,0 +1,68 @@
+<% layout('partials/layout') -%>
+
+<div class="container py-5">
+  <h1 class="text-center mb-5 fw-bold text-dark">
+    Admin Dashboard
+  </h1>
+  <div class="row g-4 justify-content-center">
+
+
+
+    <div class="col-md-3">
+      <div class="card shadow-sm h-100 border-0 rounded-3">
+        <a href="/address" class="card-body text-decoration-none text-dark">
+          <h5 class="fw-bold text-primary">My Address</h5>
+          <p class="text-muted small">Manage My Address</p>
+        </a>
+      </div>
+    </div>
+
+
+    <div class="col-md-3">
+      <div class="card shadow-sm h-100 border-0 rounded-3">
+        <a href="/orders" class="card-body text-decoration-none text-dark">
+          <h5 class="fw-bold text-primary">My Orders</h5>
+          <p class="text-muted small">Manage My Order</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card  shadow-sm border-0">
+        <a href="/users" class="text-decoration-none text-dark d-block p-4 h-100">
+          <h2 class="h5 text-primary mb-2">Show All Users</h2>
+          <p class="text-muted mb-0">View a list of all registered users.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card h-100 shadow-sm border-0">
+        <a href="/users/add" class="text-decoration-none text-dark d-block p-4 h-100">
+          <h2 class="h5 text-primary mb-2">Add New User</h2>
+          <p class="text-muted mb-0">Create a new user account.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card  shadow-sm border-0">
+        <a href="/categories" class="text-decoration-none text-dark d-block p-4 h-100">
+          <h2 class="h5 text-primary mb-2">Manage Category</h2>
+          <p class="text-muted mb-0">Add, Update and Delete Category</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card h-100 shadow-sm border-0">
+        <form action="/auth/logout" method="POST" class="h-100">
+          <button type="submit" class="btn w-100 h-100 text-start text-dark text-decoration-none p-4" style="background:none; border:none;">
+            <h2 class="h5 text-primary mb-2">Log Out</h2>
+            <p class="text-muted mb-0">End your current session.</p>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

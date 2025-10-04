@@ -1,0 +1,96 @@
+<% layout('partials/layout') -%>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Order Details - #<%= order.id %></h2>
+    <a href="/orders" class="btn btn-outline-secondary">
+      <i class="bi bi-arrow-left"></i> Back to Orders
+    </a>
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Order Summary</h5>
+      <p><strong>Status:</strong>
+        <span class="badge 
+          <% if(order.status === 'pending'){ %> bg-warning text-dark
+          <% } else if(order.status === 'completed'){ %> bg-success
+          <% } else { %> bg-secondary <% } %>">
+          <%= order.status %>
+        </span>
+      </p>
+      <p><strong>Total Price:</strong> ₹<%= order.total_price %></p>
+      <p><strong>Placed On:</strong>
+        <% if (order.items.length > 0) { %>
+        <%= new Date(order.items[0].created_at).toLocaleDateString('en-IN',{ year:'numeric', month:'short', day:'numeric'}) %>
+        <% } else { %>
+        <span class="text-muted">N/A</span>
+        <% } %>
+      </p>
+    </div>
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body d-flex align-items-center">
+      <img src="/images/<%= order.user.profile %>" alt="User" class="rounded-circle me-3" style="width:60px;height:60px;object-fit:cover;">
+      <div>
+        <h6 class="mb-1"><%= order.user.name %></h6>
+        <p class="mb-0"><i class="bi bi-envelope"></i> <%= order.user.email %></p>
+        <p class="mb-0"><i class="bi bi-telephone"></i> <%= order.user.phone_number %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Shipping Address</h5>
+      <p class="mb-1"><strong>Line 1:</strong> <%= order.address.address_line_1 %></p>
+      <% if (order.address.address_line_2) { %>
+      <p class="mb-1"><strong>Line 2:</strong> <%= order.address.address_line_2 %></p>
+      <% } %>
+      <p class="mb-1"><strong>City:</strong> <%= order.address.city %></p>
+      <p class="mb-1"><strong>Country:</strong> <%= order.address.country %></p>
+      <p><strong>Postal Code:</strong> <%= order.address.postal_code %></p>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">Items (<%= order.items.length %>)</h5>
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Subtotal</th>
+              <th>Added On</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% order.items.forEach(item => { %>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="/images/<%= item.product.image_url %>" alt="<%= item.product.title %>" class="rounded me-2" style="width:50px;height:50px;object-fit:cover;">
+                  <div>
+                    <strong><%= item.product.title %></strong>
+                    <p class="mb-0 small text-muted"><%= item.product.description %></p>
+                  </div>
+                </div>
+              </td>
+              <td><%= item.quantity %></td>
+              <td>₹<%= item.product.price %></td>
+              <td>₹<%= (item.quantity * parseFloat(item.product.price)).toFixed(2) %></td>
+              <td>
+                <%= new Date(item.created_at).toLocaleDateString('en-IN',{year:'numeric',month:'short',day:'numeric'}) %>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

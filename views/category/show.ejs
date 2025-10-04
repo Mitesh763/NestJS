@@ -1,0 +1,55 @@
+<% layout('partials/layout') -%>
+
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="mb-0">Categories</h2>
+      <a href="/categories/add" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Add New Category
+      </a>
+    </div>
+
+    <div class="list-group shadow-sm">
+      <% categories.forEach(function(category) { %>
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="mb-1">
+              <%= category.name %>
+            </h5>
+            <small class="text-muted">
+              <%= category.description %>
+            </small>
+          </div>
+          <div>
+            <a href="/categories/<%= category.id %>" class="btn btn-sm btn-warning me-2"><i class="bi bi-pencil"></i> Edit</a>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+              data-bs-target="#confirmDeleteModal<%= category.id %>">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </div>
+
+          <div class="modal fade" id="confirmDeleteModal<%= category.id %>" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                  <h5 class="modal-title">Confirm Delete</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to delete <b>
+                    <%= category.name %>
+                  </b>?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <form action="/categories/<%= category.id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <% }) %>
+    </div>
+  </div>

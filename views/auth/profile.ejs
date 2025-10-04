@@ -1,0 +1,35 @@
+<% layout('partials/layout') -%>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card user-card shadow-lg border-0 p-4 text-center">
+        <div class="profile-image mb-3">
+          <img src="/images/<%= user.profile %>" alt="<%= user.name %>" class="rounded-circle img-fluid shadow user-avatar">
+        </div>
+
+        <h3 class="fw-bold text-primary mb-2"><%= user.name %></h3>
+
+        <div class="contact-info">
+          <p class="text-muted mb-2">
+            <i class="bi bi-envelope-fill text-danger me-2"></i><%= user.email %>
+          </p>
+          <p class="text-muted mb-0">
+            <i class="bi bi-telephone-fill text-success me-2"></i><%= user.phone_number %>
+          </p>
+        </div>
+
+        <div class="mt-4">
+          <a href="/auth/update-profile" class="btn btn-outline-primary me-2">
+            <i class="bi bi-pencil-square me-1"></i>Edit Profile
+          </a>
+          <form action="/auth/logout" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger">
+              <i class="bi bi-box-arrow-right me-1"></i>Logout
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
